@@ -46,19 +46,11 @@ public class StudentInfo extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String semestreStr = request.getParameter("semestre");
+            Integer semestre = Integer.parseInt(semestreStr);
             String idEstudianteStr = request.getParameter("idEstudiante");
-            Integer idEstudiante = 0;
-            Integer semestre = 0;
-            if (semestreStr != null && !semestreStr.equals("")) {
-                idEstudiante = Integer.parseInt(idEstudianteStr);
-            }
-            if (idEstudianteStr != null && !idEstudianteStr.equals("")) {
-                semestre = Integer.parseInt(semestreStr);
-            }
+            Integer idEstudiante = Integer.parseInt(idEstudianteStr);
 
             Estudiante est = new Estudiante(idEstudiante, nombre, apellido, semestre);
-            
-            System.out.println(action);
 
             if (action.equals("Agregar")) {
                 estudianteFacade.create(est);
@@ -70,7 +62,6 @@ public class StudentInfo extends HttpServlet {
                 est=estudianteFacade.find(est.getIdEstudiante());
             }
             
-            request.setAttribute("student", est);
             request.setAttribute("allStudent", estudianteFacade.findAll());
             request.getRequestDispatcher("studentInfo.jsp").forward(request, response);
             

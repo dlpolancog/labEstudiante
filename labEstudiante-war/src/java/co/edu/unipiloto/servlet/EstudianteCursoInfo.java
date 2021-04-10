@@ -5,6 +5,7 @@
  */
 package co.edu.unipiloto.servlet;
 
+import co.edu.unipiloto.estudiante.entity.Estudiantecurso;
 import co.edu.unipiloto.estudiante.session.EstudiantecursoFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,9 +44,12 @@ public class EstudianteCursoInfo extends HttpServlet {
             Integer codigoCurso=Integer.parseInt(request.getParameter("codigoCurso"));
             Double nota=Double.parseDouble(request.getParameter("nota"));
             
-            if (request.getParameter("action").equals("Add")) {
-                estudiantecursoFacade.insertarEstudianteCurso(codigoCurso,idEstudiante,nota);
+            Estudiantecurso estudianteCurso = new Estudiantecurso (codigoCurso, idEstudiante, nota);
+            if (request.getParameter("action").equals("Agregar")) {
+                estudiantecursoFacade.create(estudianteCurso);
             }
+            
+            request.getRequestDispatcher("studentInfo.jsp").forward(request, response);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

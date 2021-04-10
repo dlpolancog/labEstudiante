@@ -46,17 +46,13 @@ public class Estudiantecurso implements Serializable {
     public Estudiantecurso() {
     }
 
-    public Estudiantecurso(EstudiantecursoPK estudiantecursoPK, Double nota) {
-        this.estudiantecursoPK = estudiantecursoPK;
-        this.nota = nota;
-    }
-
     public Estudiantecurso(EstudiantecursoPK estudiantecursoPK) {
         this.estudiantecursoPK = estudiantecursoPK;
     }
 
-    public Estudiantecurso(int codigoCurso, int idEstudiante) {
+    public Estudiantecurso(int codigoCurso, int idEstudiante, Double nota) {
         this.estudiantecursoPK = new EstudiantecursoPK(codigoCurso, idEstudiante);
+        this.nota = nota;
     }
 
     public EstudiantecursoPK getEstudiantecursoPK() {

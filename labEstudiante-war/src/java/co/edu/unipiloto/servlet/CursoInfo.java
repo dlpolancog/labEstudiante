@@ -35,6 +35,7 @@ public class CursoInfo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -43,37 +44,23 @@ public class CursoInfo extends HttpServlet {
             String action = request.getParameter("action");
             String nombreCurso = request.getParameter("nombreCurso");
             String codigoCursoStr = request.getParameter("codigoCurso");
+            Integer codigoCurso = Integer.parseInt(codigoCursoStr);
             String numeroCreditosStr = request.getParameter("numeroCreditos");
+            Integer numeroCreditos = Integer.parseInt(numeroCreditosStr);
             String semestreStr = request.getParameter("semestre");
+            Integer semestre = Integer.parseInt(semestreStr);
             String estudiantesAdmitidosStr = request.getParameter("estudiantesAdmitidos");
-            Integer codigoCurso=0;
-            Integer semestre=0;
-            Integer numeroCreditos=0;
-            Integer estudiantesAdmitidos=0;
+            Integer estudiantesAdmitidos=Integer.parseInt(estudiantesAdmitidosStr);
             
-            if (codigoCursoStr != null && !codigoCursoStr.equals("")) {
-                codigoCurso = Integer.parseInt(codigoCursoStr);
-            }
-            if (numeroCreditosStr != null && !numeroCreditosStr.equals("")) {
-                numeroCreditos = Integer.parseInt(numeroCreditosStr);
-            }
-            if (semestreStr != null && !semestreStr.equals("")) {
-                semestre = Integer.parseInt(semestreStr);
-            }
-            if (estudiantesAdmitidosStr != null && !estudiantesAdmitidosStr.equals("")) {
-                estudiantesAdmitidos = Integer.parseInt(estudiantesAdmitidosStr);
+            Curso curso = new Curso (codigoCurso, nombreCurso, numeroCreditos, semestre, estudiantesAdmitidos);
+            
+            if (action.equals("Agregar")) {
+                cursoFacade.create(curso);
+            } else if (action.equals("Buscar")) {
+                curso=cursoFacade.find(curso.getCodigoCurso());
             }
             
-            Curso cursoinf = new Curso (codigoCurso, nombreCurso, semestre, estudiantesAdmitidos,numeroCreditos);
-            
-            if (action.equals("Add")) {
-                cursoFacade.create(cursoinf);
-            } else if (action.equals("Search")) {
-                cursoinf=cursoFacade.find(cursoinf.getCodigoCurso());
-            }
-            
-            request.setAttribute("course", cursoinf);
-            //request.setAttribute("allStudents", cursoFacade.findAll());
+            request.setAttribute("allCurso", cursoFacade.findAll());
             request.getRequestDispatcher("studentInfo.jsp").forward(request, response);
             
             out.println("<!DOCTYPE html>");

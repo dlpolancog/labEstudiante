@@ -30,8 +30,5 @@ public interface EstudiantecursoFacadeLocal {
     List<Estudiantecurso> findRange(int[] range);
 
     int count();
-    
-    void insertarEstudianteCurso(int codeCurso, int studenidEstudiante, Double nota);
-    
-    Estudiantecurso consultarEstudiantecurso(EstudiantecursoPK pk);
+
 }

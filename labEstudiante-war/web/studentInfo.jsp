@@ -4,27 +4,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Information</title>
+        <title>Formulario llenado de datos</title>
     </head>
     <body>
-        <h1>Student Information</h1>
+        <h1>Información del estudiante</h1>
         <form action="./StudentInfo" method="POST">
             <table>
                 <tr>
-                    <td>Student Id</td>
-                    <td><input type="text" name="idEstudiante" value="${student.idEstudiante}" /></td>
+                    <td>Identificación del estudiante</td>
+                    <td><input type="text" name="idEstudiante" value="${estudiante.idEstudiante}" /></td>
                 </tr>
                 <tr>
-                    <td>First Name</td>
-                    <td><input type="text" name="nombre" value="${student.nombre}" /></td>
+                    <td>Nombre</td>
+                    <td><input type="text" name="nombre" value="${estudiante.nombre}" /></td>
                 </tr>
                 <tr>
-                    <td>Last Name</td>
-                    <td><input type="text" name="apellido" value="${student.apellido}" /></td>
+                    <td>Apellido</td>
+                    <td><input type="text" name="apellido" value="${estudiante.apellido}" /></td>
                 </tr>
                 <tr>
-                    <td>Year Level</td>
-                    <td><input type="text" name="semestre" value="${student.semestre}" /></td>
+                    <td>Semestre</td>
+                    <td><input type="text" name="semestre" value="${estudiante.semestre}" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -38,10 +38,10 @@
         </form>
         <br>
         <table border="1">
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Year Level</th>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Semestre</th>
                 <c:forEach items="${allStudent}" var="stud">
                 <tr>
                     <td>${stud.idEstudiante}</td>
@@ -51,61 +51,79 @@
                 </tr>
             </c:forEach> 
         </table>
-
-        <h1>Add student to class</h1>
-        <form action="./EstudianteCursoInfo" method="POST">
-            <table>
-                <tr>
-                    <td>Student id</td>
-                    <td><input type="text" name="idEstudiante" value="${stuSub.idEstudiante}" /></td>
-                </tr>
-                <tr>
-                    <td>Subject Id</td>
-                    <td><input type="text" name="codigoCurso" value="${stuSub.codigoCurso}" /></td>
-                </tr>
-                <tr>
-                    <td>Grade</td>
-                    <td><input type="text" name="nota" value="${stuSub.nota}" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" name="action" value="Agregar" />
-                    </td>
-                </tr>
-            </table>
-        </form> 
-        <br>
-
+        
         <h1>Información del curso</h1>
-         <form action="./CursoInfo" method="POST">
+        <form action="./CursoInfo" method="POST">
             <table>
                 <tr>
-                    <td>Nombre</td>
-                    <td><input type="text" name="nombreCurso" value="${subInf.nombreCurso}" /></td>
+                    <td>Código del curso</td>
+                    <td><input type="text" name="codigoCurso" value="${curso.codigoCurso}" /></td>
                 </tr>
                 <tr>
-                    <td>Codigo</td>
-                    <td><input type="text" name="codigoCurso" value="${subInf.codigoCurso}" /></td>
+                    <td>Nombre del curso</td>
+                    <td><input type="text" name="nombreCurso" value="${curso.nombreCurso}" /></td>
                 </tr>
                 <tr>
-                    <td>Creditos</td>
-                    <td><input type="text" name="numeroCreditos" value="${subInf.numeroCreditos}" /></td>
+                    <td>Número de creditos</td>
+                    <td><input type="text" name="numeroCreditos" value="${curso.numeroCreditos}" /></td>
                 </tr>
                 <tr>
                     <td>Semestre</td>
-                    <td><input type="text" name="semestre" value="${subInf.semestre}" /></td>
+                    <td><input type="text" name="semestre" value="${curso.semestre}" /></td>
                 </tr>
                 <tr>
                     <td>Estudiantes Admitidos</td>
-                    <td><input type="text" name="estudiantesAdmitidos" value="${subInf.estudiantesAdmitidos}" /></td>
+                    <td><input type="text" name="estudiantesAdmitidos" value="${curso.estudiantesAdmitidos}" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <input type="submit" name="action" value="Agregar" />
-                        <input type="submit" name="action" value="buscar" />
+                        <input type="submit" name="action" value="Buscar" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <table border="1">
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Semestre</th>
+            <th>EstudiantesAdmitidos</th>
+                <c:forEach items="${allCurso}" var="cur">
+                <tr>
+                    <td>${cur.codigoCurso}</td>
+                    <td>${cur.nombreCurso}</td>
+                    <td>${cur.numeroCreditos}</td>
+                    <td>${cur.semestre}</td>
+                    <td>${cur.estudiantesAdmitidos}</td>
+                </tr>
+            </c:forEach> 
+        </table>
+        <br>     
+        
+        <h1>Añadir estudiante a un curso</h1>
+        <form action="./EstudianteCursoInfo" method="POST">
+            <table>
+                <tr>
+                    <td>Código del curso</td>
+                    <td><input type="text" name="codigoCurso" value="${estudianteCurso.codigoCurso}" /></td>
+                </tr>
+                <tr>
+                    <td>Identificación del estudiante</td>
+                    <td><input type="text" name="idEstudiante" value="${estudianteCurso.idEstudiante}" /></td>
+                </tr>
+                <tr>
+                    <td>Nota</td>
+                    <td><input type="text" name="nota" value="${estudianteCurso.nota}" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="action" value="Agregar" />
                     </td>
                 </tr>
             </table>
         </form> 
+         
     </body>
 </html>

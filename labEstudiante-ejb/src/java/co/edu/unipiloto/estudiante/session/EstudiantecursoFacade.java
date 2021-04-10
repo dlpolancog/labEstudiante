@@ -7,6 +7,7 @@ package co.edu.unipiloto.estudiante.session;
 
 import co.edu.unipiloto.estudiante.entity.Estudiantecurso;
 import co.edu.unipiloto.estudiante.entity.EstudiantecursoPK;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,24 +29,6 @@ public class EstudiantecursoFacade extends AbstractFacade<Estudiantecurso> imple
 
     public EstudiantecursoFacade() {
         super(Estudiantecurso.class);
-    }
-    
-    @Override
-    public void insertarEstudianteCurso(int codeCurso, int studenidEstudiante, Double nota)
-    {
-        EstudiantecursoPK pk = new EstudiantecursoPK(codeCurso, studenidEstudiante);
-        if (consultarEstudiantecurso(pk)!= null) {
-            
-        } else {
-            Estudiantecurso ec = new Estudiantecurso(pk,nota);
-            em.persist(ec);
-            
-        }
-    }
-
-    @Override
-    public Estudiantecurso consultarEstudiantecurso(EstudiantecursoPK pk) {
-        return em.find(Estudiantecurso.class,pk);
     }
     
 }
